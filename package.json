@@ -1,0 +1,27 @@
+{
+  "name": "poker-api",
+  "version": "1.0.0",
+  "description": "poker api",
+  "main": "main.ts",
+  "repository": "https://HiromuKinoshita/poker-api",
+  "author": "HiromuKinoshita",
+  "license": "NONLICENSED",
+  "private": true,
+  "scripts": {
+    "eslint": "eslint",
+    "eslint:fix": "yarn lint:eslint --fix",
+    "prettier": "prettier . \"!test*\" --check",
+    "prettier:fix": "yarn lint:prettier --write",
+    "fix": "run-s fix:eslint fix:prettier"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "pokersolver": "^2.1.4"
+  }
+}
