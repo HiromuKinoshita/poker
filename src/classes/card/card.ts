@@ -56,7 +56,7 @@ function getNameByNum(num: Num): Name {
   return names[num - 2]
 }
 
-export function getDeck(): Card[] {
+export function getAllCards(): Card[] {
   let deck: Card[] = [];
 
   for (const suit of suits) {
