@@ -6,6 +6,7 @@ export class Dealer implements IDealer {
   constructor() {
     this.deck = this.getDeck()
   }
+  // TODO: 全然シャッフルできてないので直す
   getDeck() {
     const baseDeck = getAllCards()
     const len = baseDeck.length
