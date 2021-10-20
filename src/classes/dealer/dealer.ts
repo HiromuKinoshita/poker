@@ -34,4 +34,16 @@ export class Dealer implements IDealer {
     }
     return cards
   }
+  // 一旦数の大小だけで決着がつくようにしてみた
+  judgeGame(players: IPlayer[]): { name: string; num: Num; } {
+    // TODO: 何かしらオブジェクト化した方が良さそう
+    let ps: { name: string; num: Num; }[] = []
+    players.forEach(p => {
+      let biggestCard = p.hand.reduce((a, b) => a.num > b.num ? a : b)
+      ps.push({
+        name: p.name,
+        num: biggestCard.num
+      })
+    })
+    return ps.reduce((a, b) => a.num > b.num ? a : b)
 }
