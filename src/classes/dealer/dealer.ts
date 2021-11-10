@@ -1,4 +1,5 @@
-import { Card } from '@/classes/card/card.d'
+import { Card, Num } from '@/classes/card/card.d'
+import { IPlayer } from "@/classes/player/player.d";
 import { getAllCards } from '@/classes/card/card'
 import { IDealer } from '@/classes/dealer/dealer.d'
 
@@ -35,15 +36,19 @@ export class Dealer implements IDealer {
     return cards
   }
   // 一旦数の大小だけで決着がつくようにしてみた
-  judgeGame(players: IPlayer[]): { name: string; num: Num; } {
-    // TODO: 何かしらオブジェクト化した方が良さそう
-    let ps: { name: string; num: Num; }[] = []
-    players.forEach(p => {
-      let biggestCard = p.hand.reduce((a, b) => a.num > b.num ? a : b)
-      ps.push({
-        name: p.name,
-        num: biggestCard.num
+  judgeGame(players: IPlayer[], field: Card[]): IPlayer[] {
+    let playerStrengths: { name: string; num: Num; }[] = []
+    players.forEach(player => {
+      const numsHand = player.hand.map(card => card.num)
+      const numsField = field.map(card => card.num)
+      const biggestNum = numsHand.concat(numsField).reduce((a, n) => a > n ? a : n)
+      playerStrengths.push({
+        name: player.name,
+        num: biggestNum,
       })
     })
-    return ps.reduce((a, b) => a.num > b.num ? a : b)
+    const allBiggestNum = playerStrengths.reduce((a, b) => a.num > b.num ? a : b).num
+    const winnerNames = playerStrengths.filter(s => s.num === allBiggestNum).map(winner => winner.name)
+    return players.filter(player => winnerNames.includes(player.name))
+  }
 }
